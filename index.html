@@ -750,6 +750,129 @@
       #contact { padding: 8rem 6rem; }
       footer { padding: 2rem 6rem; }
     }
+
+    /* HAMBURGER */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: none;
+      padding: 0.3rem;
+      z-index: 101;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--accent);
+      transition: all 0.3s ease;
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* SIDEBAR */
+    .sidebar-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      backdrop-filter: blur(4px);
+    }
+    .sidebar-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0; right: 0;
+      width: 280px;
+      height: 100vh;
+      background: #0a0f1a;
+      border-left: 1px solid var(--border);
+      z-index: 201;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .sidebar.active { transform: translateX(0); }
+
+    .sidebar-close {
+      align-self: flex-end;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 1.2rem;
+      cursor: none;
+      transition: color 0.2s;
+    }
+    .sidebar-close:hover { color: var(--accent); }
+
+    .sidebar-logo {
+      font-family: 'Fira Code', monospace;
+      font-size: 1rem;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+    }
+    .sidebar-logo span { color: var(--muted); }
+
+    .sidebar-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex: 1;
+    }
+    .sidebar-links a {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      padding: 0.8rem 1rem;
+      display: block;
+      border-left: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .sidebar-links a::before {
+      content: attr(data-num) ' ';
+      color: var(--accent);
+    }
+    .sidebar-links a:hover {
+      color: var(--text);
+      border-left-color: var(--accent);
+      padding-left: 1.5rem;
+    }
+
+    .sidebar-footer {
+      display: flex;
+      gap: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .sidebar-footer a {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+    .sidebar-footer a:hover { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+    }
   </style>
 </head>
 <body>
@@ -758,7 +881,7 @@
   <div class="cursor-ring" id="cursorRing"></div>
 
   <!-- NAV -->
-  <nav>
+  <<nav>
     <a href="#hero" class="logo">endbel<span>.dev</span></a>
     <ul class="nav-links">
       <li><a href="#about" data-num="01">sobre mí</a></li>
@@ -766,7 +889,29 @@
       <li><a href="#skills" data-num="03">skills</a></li>
       <li><a href="#contact" data-num="04">contacto</a></li>
     </ul>
+    <button class="hamburger" id="hamburger" aria-label="menú">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </nav>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <button class="sidebar-close" id="sidebarClose">✕</button>
+    <a href="#hero" class="sidebar-logo">endbel<span>.dev</span></a>
+    <ul class="sidebar-links">
+      <li><a href="#about" data-num="01">sobre mí</a></li>
+      <li><a href="#projects" data-num="02">proyectos</a></li>
+      <li><a href="#skills" data-num="03">skills</a></li>
+      <li><a href="#contact" data-num="04">contacto</a></li>
+    </ul>
+    <div class="sidebar-footer">
+      <a href="https://github.com/endbel" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/miperfilbelenrodriguez/" target="_blank">LinkedIn</a>
+    </div>
+  </aside>
 
   <!-- HERO -->
   <section id="hero">
@@ -1323,6 +1468,31 @@
       });
     }, { threshold: 0.15 });
     reveals.forEach(r => observer.observe(r));
+
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+
+    function openSidebar() {
+      sidebar.classList.add('active');
+      overlay.classList.add('active');
+      hamburger.classList.add('active');
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove('active');
+      overlay.classList.remove('active');
+      hamburger.classList.remove('active');
+    }
+
+    hamburger.addEventListener('click', openSidebar);
+    overlay.addEventListener('click', closeSidebar);
+    document.getElementById('sidebarClose').addEventListener('click', closeSidebar);
+
+    document.querySelectorAll('.sidebar-links a').forEach(link => {
+      link.addEventListener('click', closeSidebar);
+    });
   </script>
 </body>
 </html>

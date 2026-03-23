@@ -165,10 +165,44 @@ h1.hero-name .line2 {
   color: var(--muted);
   line-height: 1.7;
   max-width: 520px;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
   font-weight: 400;
   opacity: 0;
   animation: fadeUp 0.6s 0.6s forwards;
+}
+
+.recruiter-scan {
+  margin-bottom: 2rem;
+  max-width: 720px;
+  border: 1px solid rgba(0,245,160,0.22);
+  background: linear-gradient(180deg, rgba(0,245,160,0.06), rgba(0,245,160,0.015));
+  padding: 0.95rem 1.1rem;
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+  opacity: 0;
+  animation: fadeUp 0.6s 0.72s forwards;
+}
+
+.scan-title {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.55rem;
+}
+
+.scan-list {
+  list-style: none;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.scan-list li {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text);
+  letter-spacing: 0.04em;
+  line-height: 1.5;
 }
 
 .hero-cta {
@@ -272,8 +306,92 @@ h1.hero-name .line2 {
   text-align: center;
 }
 
+#about > .reveal:first-child .section-label,
+#about > .reveal:first-child .section-title,
+#about > .reveal:first-child .about-text p,
+#about > .reveal:first-child .about-snapshot,
+#about > .reveal:first-child .about-visual {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+#about > .reveal:first-child.seen .section-label,
+#about > .reveal:first-child.seen .section-title,
+#about > .reveal:first-child.seen .about-text p,
+#about > .reveal:first-child.seen .about-snapshot,
+#about > .reveal:first-child.seen .about-visual {
+  transform: translateY(8px);
+  transition-duration: 0.16s;
+}
+
+#about > .reveal:first-child.visible .section-label,
+#about > .reveal:first-child.visible .section-title,
+#about > .reveal:first-child.visible .about-text p,
+#about > .reveal:first-child.visible .about-snapshot,
+#about > .reveal:first-child.visible .about-visual {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#about > .reveal:first-child.visible .section-label {
+  transition-delay: 0s;
+}
+
+#about > .reveal:first-child.visible .section-title {
+  transition-delay: 0.03s;
+}
+
+#about > .reveal:first-child.visible .about-text p:nth-child(1) {
+  transition-delay: 0.05s;
+}
+
+#about > .reveal:first-child.visible .about-text p:nth-child(2) {
+  transition-delay: 0.07s;
+}
+
+#about > .reveal:first-child.visible .about-text p:nth-child(3) {
+  transition-delay: 0.09s;
+}
+
+#about > .reveal:first-child.visible .about-snapshot {
+  transition-delay: 0.015s;
+}
+
+#about > .reveal:first-child.visible .about-visual {
+  transition-delay: 0.12s;
+}
+
+#about > .reveal:first-child.seen.visible .section-label {
+  transition-delay: 0s;
+}
+
+#about > .reveal:first-child.seen.visible .section-title {
+  transition-delay: 0.015s;
+}
+
+#about > .reveal:first-child.seen.visible .about-text p:nth-child(1) {
+  transition-delay: 0.03s;
+}
+
+#about > .reveal:first-child.seen.visible .about-text p:nth-child(2) {
+  transition-delay: 0.04s;
+}
+
+#about > .reveal:first-child.seen.visible .about-text p:nth-child(3) {
+  transition-delay: 0.05s;
+}
+
+#about > .reveal:first-child.seen.visible .about-snapshot {
+  transition-delay: 0.01s;
+}
+
+#about > .reveal:first-child.seen.visible .about-visual {
+  transition-delay: 0.06s;
+}
+
 #about > .reveal:first-child .section-label {
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 #about > .reveal:first-child .section-label::after {
@@ -332,6 +450,39 @@ h2.section-title {
 .about-text strong {
   color: var(--text);
   font-weight: 600;
+}
+
+.about-snapshot {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(0,245,160,0.2);
+  background: rgba(0,245,160,0.03);
+  padding: 0.9rem 1rem;
+}
+
+.about-snapshot-title {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  margin-bottom: 0.7rem;
+}
+
+.about-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.about-pills span {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  color: var(--text);
+  border: 1px solid rgba(0,245,160,0.22);
+  background: rgba(0,245,160,0.04);
+  padding: 0.33rem 0.6rem;
+  letter-spacing: 0.04em;
 }
 
 /* Stack grid */
@@ -393,6 +544,11 @@ h2.section-title {
 .devicon-docker-plain { color: #2496ed; }
 .devicon-github-original { color: #e8edf5; }
 .devicon-bash-plain { color: #4eaa25; }
+.devicon-vitejs-plain { color: #a48cff; }
+.devicon-githubactions-plain { color: #2088ff; }
+.devicon-prisma-original { color: #2d3748; }
+.devicon-mongodb-plain { color: #47a248; }
+.devicon-eslint-original { color: #4b32c3; }
 
 /* About visual */
 .about-visual {
@@ -445,11 +601,8 @@ h2.section-title {
 
 .t-line {
   display: block;
+  width: 100%;
   white-space: pre-wrap;
-}
-
-.t-prompt {
-  color: var(--accent);
 }
 
 .t-cmd {
@@ -457,7 +610,7 @@ h2.section-title {
 }
 
 .t-out {
-  color: var(--muted);
+  color: rgba(0,245,160,0.78);
 }
 
 .t-val {
@@ -473,35 +626,14 @@ h2.section-title {
   animation: blink 1s step-end infinite;
 }
 
-.terminal-body-interactive {
+.terminal-body-static {
   min-height: 360px;
   max-height: 460px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
-}
-
-.terminal-input-row {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  margin-top: 0.3rem;
-}
-
-.terminal-input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: var(--text);
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-}
-
-.terminal-input::placeholder {
-  color: var(--muted);
-  opacity: 0.8;
+  text-align: left;
 }
 
 .sr-only {
@@ -607,8 +739,19 @@ h2.section-title {
   font-size: 0.9rem;
   color: var(--muted);
   line-height: 1.7;
-  margin-bottom: 2rem;
+  margin-bottom: 0.8rem;
   font-weight: 400;
+}
+
+.project-impact {
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  color: var(--accent);
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  margin-bottom: 1.5rem;
+  border-left: 1px solid rgba(0,245,160,0.35);
+  padding-left: 0.7rem;
 }
 
 .project-tags {
@@ -689,6 +832,16 @@ h2.section-title {
 
 #skills .section-label::after {
   max-width: 120px;
+}
+
+.skills-context {
+  margin-top: 0.6rem;
+  max-width: 720px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  line-height: 1.6;
 }
 
 .skills-row {
@@ -775,8 +928,39 @@ h2.section-title {
 .contact-sub {
   font-size: 1rem;
   color: var(--muted);
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
   font-weight: 400;
+}
+
+.availability-box {
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.01);
+  padding: 1rem 1.1rem;
+  margin-bottom: 2rem;
+  max-width: 760px;
+}
+
+.availability-title {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--accent);
+  letter-spacing: 0.14em;
+  margin-bottom: 0.6rem;
+  text-transform: uppercase;
+}
+
+.availability-list {
+  list-style: none;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.availability-list li {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text);
+  letter-spacing: 0.04em;
+  line-height: 1.5;
 }
 
 .contact-links {
@@ -967,6 +1151,8 @@ footer .accent {
   #hero { padding: 0 1.2rem; padding-top: 4.5rem; }
   h1.hero-name { font-size: clamp(2.8rem, 12vw, 4rem); }
   .hero-desc { font-size: 0.95rem; }
+  .recruiter-scan { padding: 0.85rem 0.9rem; margin-bottom: 1.5rem; }
+  .scan-list li { font-size: 0.67rem; letter-spacing: 0.03em; }
   #about { grid-template-columns: 1fr; padding: 4rem 1.2rem; gap: 2.5rem; }
   .about-visual { display: none; }
   .stack-grid { grid-template-columns: repeat(2, 1fr); }
@@ -976,9 +1162,29 @@ footer .accent {
   #skills { padding: 4rem 1.2rem; }
   #contact { padding: 4rem 1.2rem; }
   .contact-big { font-size: clamp(2rem, 10vw, 3rem); }
+  .availability-box { padding: 0.85rem 0.9rem; }
+  .availability-list li { font-size: 0.67rem; }
   .contact-links { flex-direction: column; align-items: flex-start; }
   footer { padding: 1.2rem; flex-direction: column; gap: 0.5rem; text-align: left; }
   .scroll-hint { display: none; }
+
+  #about > .reveal:first-child .section-label,
+  #about > .reveal:first-child .section-title,
+  #about > .reveal:first-child .about-text p,
+  #about > .reveal:first-child .about-visual {
+    transition-duration: 0.16s;
+  }
+
+  #about > .reveal:first-child.visible .section-label,
+  #about > .reveal:first-child.visible .section-title,
+  #about > .reveal:first-child.visible .about-text p,
+  #about > .reveal:first-child.visible .about-visual,
+  #about > .reveal:first-child.seen.visible .section-label,
+  #about > .reveal:first-child.seen.visible .section-title,
+  #about > .reveal:first-child.seen.visible .about-text p,
+  #about > .reveal:first-child.seen.visible .about-visual {
+    transition-delay: 0s;
+  }
 }
 
 /* TABLET — 481px a 768px */
@@ -987,6 +1193,7 @@ footer .accent {
   .nav-links { display: none; }
   #hero { padding: 0 2rem; padding-top: 5rem; }
   h1.hero-name { font-size: clamp(3rem, 10vw, 5rem); }
+  .scan-list li { font-size: 0.69rem; }
   #about { grid-template-columns: 1fr; padding: 5rem 2rem; gap: 3rem; }
   .about-visual { display: none; }
   .stack-grid { grid-template-columns: repeat(3, 1fr); }
@@ -995,9 +1202,28 @@ footer .accent {
   .project-card { padding: 2rem; }
   #skills { padding: 5rem 2rem; }
   #contact { padding: 5rem 2rem; }
+  .availability-list li { font-size: 0.69rem; }
   .contact-links { flex-direction: column; align-items: flex-start; }
   footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: left; }
   .scroll-hint { display: none; }
+
+  #about > .reveal:first-child .section-label,
+  #about > .reveal:first-child .section-title,
+  #about > .reveal:first-child .about-text p,
+  #about > .reveal:first-child .about-visual {
+    transition-duration: 0.18s;
+  }
+
+  #about > .reveal:first-child.visible .section-label,
+  #about > .reveal:first-child.visible .section-title,
+  #about > .reveal:first-child.visible .about-text p,
+  #about > .reveal:first-child.visible .about-visual,
+  #about > .reveal:first-child.seen.visible .section-label,
+  #about > .reveal:first-child.seen.visible .section-title,
+  #about > .reveal:first-child.seen.visible .about-text p,
+  #about > .reveal:first-child.seen.visible .about-visual {
+    transition-delay: 0s;
+  }
 }
 
 /* TABLET GRANDE / NOTEBOOK PEQUEÑA — 769px a 1024px */

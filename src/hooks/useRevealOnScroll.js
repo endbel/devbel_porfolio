@@ -1,7 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
-export function useRevealOnScroll(threshold = 0.15) {
+export function useRevealOnScroll(threshold = 0.15, options = {}) {
+  const { once = true } = options;
   const [isVisible, setIsVisible] = useState(false);
+  const [hasBeenVisible, setHasBeenVisible] = useState(false);
   const ref = useRef(null);
 
   useEffect(() => {
@@ -10,24 +12,29 @@ export function useRevealOnScroll(threshold = 0.15) {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIsVisible(true);
+            setHasBeenVisible(true);
 
             // Animar skill bars si existen
-            const fillBars = entry.target.querySelectorAll('.skill-bar-fill');
+            const fillBars = entry.target.querySelectorAll(".skill-bar-fill");
             if (fillBars.length > 0) {
               fillBars.forEach((bar) => {
                 const width = bar.dataset.width;
                 if (width) {
-                  bar.style.width = width + '%';
+                  bar.style.width = width + "%";
                 }
               });
             }
 
-            // Disconnect después de que se hace visible
-            observer.unobserve(entry.target);
+            if (once) {
+              // Disconnect después de que se hace visible
+              observer.unobserve(entry.target);
+            }
+          } else if (!once) {
+            setIsVisible(false);
           }
         });
       },
-      { threshold }
+      { threshold },
     );
 
     const currentRef = ref.current;
@@ -39,8 +46,9 @@ export function useRevealOnScroll(threshold = 0.15) {
       if (currentRef) {
         observer.unobserve(currentRef);
       }
+      observer.disconnect();
     };
-  }, [threshold]);
+  }, [threshold, once]);
 
-  return { ref, isVisible };
+  return { ref, isVisible, hasBeenVisible };
 }

@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCursor } from "./hooks/useCursor";
+import { useHeroTerminalTyping } from "./hooks/useHeroTerminalTyping";
+import { useInteractiveTerminal } from "./hooks/useInteractiveTerminal";
 import { useRevealOnScroll } from "./hooks/useRevealOnScroll";
 import { useSidebar } from "./hooks/useSidebar";
-import { useTerminalAnimation } from "./hooks/useTerminalAnimation";
 
 function App() {
   const { cursorRef, ringRef, handleHoverEnter, handleHoverLeave } =
@@ -14,7 +15,10 @@ function App() {
   const { ref: skillsRef, isVisible: skillsVisible } = useRevealOnScroll(0.15);
   const { ref: contactRef, isVisible: contactVisible } =
     useRevealOnScroll(0.15);
-  const { termBodyRef, lines } = useTerminalAnimation();
+  const { prompt, history, runCommand } = useInteractiveTerminal();
+  const { lines: heroLines, activeLine, isDone } = useHeroTerminalTyping();
+  const terminalBodyRef = useRef(null);
+  const [terminalInput, setTerminalInput] = useState("");
 
   useEffect(() => {
     const links = document.querySelectorAll("a, button");
@@ -29,6 +33,18 @@ function App() {
       });
     };
   }, [handleHoverEnter, handleHoverLeave]);
+
+  useEffect(() => {
+    if (terminalBodyRef.current) {
+      terminalBodyRef.current.scrollTop = terminalBodyRef.current.scrollHeight;
+    }
+  }, [history]);
+
+  const handleTerminalSubmit = (e) => {
+    e.preventDefault();
+    runCommand(terminalInput);
+    setTerminalInput("");
+  };
 
   return (
     <>
@@ -90,7 +106,7 @@ function App() {
           ✕
         </button>
         <a href="#hero" className="sidebar-logo" onClick={closeSidebar}>
-          endbel<span>.dev</span>
+          dev<span>bel_</span>
         </a>
         <ul className="sidebar-links">
           <li>
@@ -132,13 +148,28 @@ function App() {
       <section id="hero">
         <div className="glow-blob"></div>
         <div className="hero-inner">
-          <p className="hero-tag">JUNIOR DEVELOPER — AVAILABLE</p>
+          <p className="hero-tag"> JUNIOR DEVELOPER — DISPONIBLE</p>
           <h1 className="hero-name">
-            Hola,
-            <br />
-            soy <span style={{ color: "var(--accent)" }}>Belén</span>
-            <br />
-            <span className="line2">Developer.</span>
+            <span className="hero-line">
+              {heroLines[0]}
+              {activeLine === 0 && <span className="hero-cursor"></span>}
+            </span>
+            <span className="hero-line">
+              {heroLines[1].slice(0, 4)}
+              <span style={{ color: "var(--accent)" }}>
+                {heroLines[1].slice(4)}
+              </span>
+              {activeLine === 1 && <span className="hero-cursor"></span>}
+            </span>
+            <span className="hero-line line2">
+              {heroLines[2]}
+              {activeLine === 2 && (
+                <span className="hero-cursor hero-cursor-outline"></span>
+              )}
+              {isDone && (
+                <span className="hero-cursor hero-cursor-outline hero-cursor-final"></span>
+              )}
+            </span>
           </h1>
           <p className="hero-desc">
             Construyo experiencias web funcionales y elegantes. Apasionada por
@@ -191,158 +222,66 @@ function App() {
               documentación técnica y comunicarme en entornos de trabajo.
             </p>
           </div>
-          <div className="stack-grid">
-            <div className="stack-item">
-              <span className="stack-icon">
-                <i className="devicon-html5-plain"></i>
-              </span>
-              <span className="stack-name">HTML</span>
-            </div>
-            <div className="stack-item">
-              <span className="stack-icon">
-                <i className="devicon-css3-plain"></i>
-              </span>
-              <span className="stack-name">CSS</span>
-            </div>
-            <div className="stack-item">
-              <span className="stack-icon">
-                <i className="devicon-javascript-plain"></i>
-              </span>
-              <span className="stack-name">JavaScript</span>
-            </div>
-            <div className="stack-item">
-              <span className="stack-icon">
-                <i className="devicon-typescript-plain"></i>
-              </span>
-              <span className="stack-name">TypeScript</span>
-            </div>
-            <div className="stack-item">
-              <span className="stack-icon">
-                <i className="devicon-react-original"></i>
-              </span>
-              <span className="stack-name">React</span>
-            </div>
-            <div className="stack-item">
-              <span className="stack-icon">
-                <i className="devicon-nodejs-plain"></i>
-              </span>
-              <span className="stack-name">Node.js</span>
-            </div>
-            <div className="stack-item">
-              <span className="stack-icon">
-                <i className="devicon-python-plain"></i>
-              </span>
-              <span className="stack-name">Python</span>
-            </div>
-            <div className="stack-item">
-              <span className="stack-icon">
-                <i className="devicon-php-plain"></i>
-              </span>
-              <span className="stack-name">PHP</span>
-            </div>
-            <div className="stack-item">
-              <span className="stack-icon">
-                <i className="devicon-java-plain"></i>
-              </span>
-              <span className="stack-name">Java</span>
-            </div>
-            <div className="stack-item">
-              <span className="stack-icon">
-                <i className="devicon-mysql-plain"></i>
-              </span>
-              <span className="stack-name">MySQL</span>
-            </div>
-            <div className="stack-item">
-              <span className="stack-icon">
-                <i className="devicon-docker-plain"></i>
-              </span>
-              <span className="stack-name">Docker</span>
-            </div>
-            <div className="stack-item">
-              <span className="stack-icon">
-                <i className="devicon-git-plain"></i>
-              </span>
-              <span className="stack-name">Git</span>
-            </div>
-            <div className="stack-item">
-              <span className="stack-icon">
-                <i className="devicon-github-original"></i>
-              </span>
-              <span className="stack-name">GitHub</span>
-            </div>
-            <div className="stack-item">
-              <span className="stack-icon">
-                <i className="devicon-npm-original-wordmark"></i>
-              </span>
-              <span className="stack-name">npm</span>
-            </div>
-            <div className="stack-item">
-              <span className="stack-icon">
-                <i
-                  className="fa-solid fa-plug"
-                  style={{ color: "var(--accent)" }}
-                ></i>
-              </span>
-              <span className="stack-name">APIs</span>
-            </div>
-            <div className="stack-item">
-              <span className="stack-icon">
-                <i className="devicon-bash-plain"></i>
-              </span>
-              <span className="stack-name">Bash</span>
-            </div>
-            <div className="stack-item">
-              <span className="stack-icon">
-                <i
-                  className="fa-solid fa-arrows-spin"
-                  style={{ color: "var(--accent)" }}
-                ></i>
-              </span>
-              <span className="stack-name">Scrum</span>
-            </div>
-            <div className="stack-item">
-              <span className="stack-icon">
-                <i
-                  className="fa-solid fa-comments"
-                  style={{ color: "var(--accent)" }}
-                ></i>
-              </span>
-              <span className="stack-name">Inglés B1</span>
-            </div>
-          </div>
-        </div>
-
-        {/* TERMINAL */}
-        <div className={`about-visual reveal ${aboutVisible ? "visible" : ""}`}>
-          <div className="terminal">
-            <div className="terminal-bar">
-              <span className="t-dot" style={{ background: "#ff5f57" }}></span>
-              <span className="t-dot" style={{ background: "#febc2e" }}></span>
-              <span className="t-dot" style={{ background: "#28c840" }}></span>
-              <span className="t-title">belen@portfolio ~</span>
-            </div>
-            <div className="terminal-body" ref={termBodyRef}>
-              {lines.map((line) => (
-                <span className="t-line" key={line.id}>
-                  {line.type === "cmd" ? (
-                    <>
-                      <span className="t-prompt">{line.prompt}</span>
-                      <span className="t-cmd">{line.text}</span>
-                      {(line.isTyping || line.text === "") && (
-                        <span className="t-cursor"></span>
-                      )}
-                    </>
-                  ) : (
-                    <span className={line.type === "val" ? "t-val" : "t-out"}>
+          <div className="about-visual">
+            <div className="terminal interactive-terminal">
+              <div className="terminal-bar">
+                <span
+                  className="t-dot"
+                  style={{ background: "#ff5f57" }}
+                ></span>
+                <span
+                  className="t-dot"
+                  style={{ background: "#febc2e" }}
+                ></span>
+                <span
+                  className="t-dot"
+                  style={{ background: "#28c840" }}
+                ></span>
+                <span className="t-title">terminal interactiva</span>
+              </div>
+              <div
+                className="terminal-body terminal-body-interactive"
+                ref={terminalBodyRef}
+              >
+                {history.map((line, idx) => (
+                  <span className="t-line" key={`${line.type}-${idx}`}>
+                    <span
+                      className={
+                        line.type === "val"
+                          ? "t-val"
+                          : line.type === "cmd"
+                            ? "t-cmd"
+                            : "t-out"
+                      }
+                    >
                       {line.text}
                     </span>
-                  )}
-                </span>
-              ))}
+                  </span>
+                ))}
+                <form
+                  className="terminal-input-row"
+                  onSubmit={handleTerminalSubmit}
+                >
+                  <label className="sr-only" htmlFor="interactiveTerminalInput">
+                    Comando terminal
+                  </label>
+                  <span className="t-prompt">{prompt}</span>
+                  <input
+                    id="interactiveTerminalInput"
+                    className="terminal-input"
+                    type="text"
+                    value={terminalInput}
+                    onChange={(e) => setTerminalInput(e.target.value)}
+                    autoComplete="off"
+                    spellCheck="false"
+                    placeholder='Escribe "help" y presiona Enter'
+                  />
+                </form>
+              </div>
             </div>
+            <div className="accent-corner"></div>
+            <div className="accent-corner2"></div>
           </div>
-          <div className="accent-corner"></div>
-          <div className="accent-corner2"></div>
         </div>
       </section>
 
@@ -537,7 +476,10 @@ function App() {
           >
             <div className="skill-bar-item">
               <div className="skill-bar-header">
-                <span className="skill-bar-name">HTML</span>
+                <span className="skill-bar-name">
+                  <i className="devicon-html5-plain"></i>
+                  HTML
+                </span>
                 <span className="skill-bar-level">intermedio</span>
               </div>
               <div className="skill-bar-track">
@@ -547,7 +489,10 @@ function App() {
 
             <div className="skill-bar-item">
               <div className="skill-bar-header">
-                <span className="skill-bar-name">CSS</span>
+                <span className="skill-bar-name">
+                  <i className="devicon-css3-plain"></i>
+                  CSS
+                </span>
                 <span className="skill-bar-level">intermedio</span>
               </div>
               <div className="skill-bar-track">
@@ -557,7 +502,10 @@ function App() {
 
             <div className="skill-bar-item">
               <div className="skill-bar-header">
-                <span className="skill-bar-name">JavaScript</span>
+                <span className="skill-bar-name">
+                  <i className="devicon-javascript-plain"></i>
+                  JavaScript
+                </span>
                 <span className="skill-bar-level">intermedio</span>
               </div>
               <div className="skill-bar-track">
@@ -567,7 +515,10 @@ function App() {
 
             <div className="skill-bar-item">
               <div className="skill-bar-header">
-                <span className="skill-bar-name">TypeScript</span>
+                <span className="skill-bar-name">
+                  <i className="devicon-typescript-plain"></i>
+                  TypeScript
+                </span>
                 <span className="skill-bar-level">básico</span>
               </div>
               <div className="skill-bar-track">
@@ -577,7 +528,10 @@ function App() {
 
             <div className="skill-bar-item">
               <div className="skill-bar-header">
-                <span className="skill-bar-name">React</span>
+                <span className="skill-bar-name">
+                  <i className="devicon-react-original"></i>
+                  React
+                </span>
                 <span className="skill-bar-level">básico</span>
               </div>
               <div className="skill-bar-track">
@@ -587,7 +541,10 @@ function App() {
 
             <div className="skill-bar-item">
               <div className="skill-bar-header">
-                <span className="skill-bar-name">Node.js</span>
+                <span className="skill-bar-name">
+                  <i className="devicon-nodejs-plain"></i>
+                  Node.js
+                </span>
                 <span className="skill-bar-level">básico</span>
               </div>
               <div className="skill-bar-track">
@@ -597,7 +554,10 @@ function App() {
 
             <div className="skill-bar-item">
               <div className="skill-bar-header">
-                <span className="skill-bar-name">PHP</span>
+                <span className="skill-bar-name">
+                  <i className="devicon-php-plain"></i>
+                  PHP
+                </span>
                 <span className="skill-bar-level">básico</span>
               </div>
               <div className="skill-bar-track">
@@ -607,7 +567,10 @@ function App() {
 
             <div className="skill-bar-item">
               <div className="skill-bar-header">
-                <span className="skill-bar-name">Python</span>
+                <span className="skill-bar-name">
+                  <i className="devicon-python-plain"></i>
+                  Python
+                </span>
                 <span className="skill-bar-level">básico</span>
               </div>
               <div className="skill-bar-track">
@@ -617,7 +580,10 @@ function App() {
 
             <div className="skill-bar-item">
               <div className="skill-bar-header">
-                <span className="skill-bar-name">Java</span>
+                <span className="skill-bar-name">
+                  <i className="devicon-java-plain"></i>
+                  Java
+                </span>
                 <span className="skill-bar-level">básico</span>
               </div>
               <div className="skill-bar-track">
@@ -627,7 +593,10 @@ function App() {
 
             <div className="skill-bar-item">
               <div className="skill-bar-header">
-                <span className="skill-bar-name">MySQL</span>
+                <span className="skill-bar-name">
+                  <i className="devicon-mysql-plain"></i>
+                  MySQL
+                </span>
                 <span className="skill-bar-level">básico</span>
               </div>
               <div className="skill-bar-track">
@@ -637,7 +606,10 @@ function App() {
 
             <div className="skill-bar-item">
               <div className="skill-bar-header">
-                <span className="skill-bar-name">Git</span>
+                <span className="skill-bar-name">
+                  <i className="devicon-git-plain"></i>
+                  Git
+                </span>
                 <span className="skill-bar-level">intermedio</span>
               </div>
               <div className="skill-bar-track">
@@ -647,7 +619,10 @@ function App() {
 
             <div className="skill-bar-item">
               <div className="skill-bar-header">
-                <span className="skill-bar-name">GitHub</span>
+                <span className="skill-bar-name">
+                  <i className="devicon-github-original"></i>
+                  GitHub
+                </span>
                 <span className="skill-bar-level">intermedio</span>
               </div>
               <div className="skill-bar-track">
@@ -657,7 +632,10 @@ function App() {
 
             <div className="skill-bar-item">
               <div className="skill-bar-header">
-                <span className="skill-bar-name">npm</span>
+                <span className="skill-bar-name">
+                  <i className="devicon-npm-original-wordmark"></i>
+                  npm
+                </span>
                 <span className="skill-bar-level">básico</span>
               </div>
               <div className="skill-bar-track">
@@ -667,7 +645,13 @@ function App() {
 
             <div className="skill-bar-item">
               <div className="skill-bar-header">
-                <span className="skill-bar-name">APIs</span>
+                <span className="skill-bar-name">
+                  <i
+                    className="fa-solid fa-plug"
+                    style={{ color: "var(--accent)" }}
+                  ></i>
+                  APIs
+                </span>
                 <span className="skill-bar-level">básico</span>
               </div>
               <div className="skill-bar-track">
@@ -677,7 +661,10 @@ function App() {
 
             <div className="skill-bar-item">
               <div className="skill-bar-header">
-                <span className="skill-bar-name">Docker</span>
+                <span className="skill-bar-name">
+                  <i className="devicon-docker-plain"></i>
+                  Docker
+                </span>
                 <span className="skill-bar-level">básico</span>
               </div>
               <div className="skill-bar-track">
@@ -687,7 +674,10 @@ function App() {
 
             <div className="skill-bar-item">
               <div className="skill-bar-header">
-                <span className="skill-bar-name">Bash</span>
+                <span className="skill-bar-name">
+                  <i className="devicon-bash-plain"></i>
+                  Bash
+                </span>
                 <span className="skill-bar-level">básico</span>
               </div>
               <div className="skill-bar-track">
@@ -697,7 +687,13 @@ function App() {
 
             <div className="skill-bar-item">
               <div className="skill-bar-header">
-                <span className="skill-bar-name">Inglés</span>
+                <span className="skill-bar-name">
+                  <i
+                    className="fa-solid fa-comments"
+                    style={{ color: "var(--accent)" }}
+                  ></i>
+                  Inglés
+                </span>
                 <span className="skill-bar-level">intermedio</span>
               </div>
               <div className="skill-bar-track">

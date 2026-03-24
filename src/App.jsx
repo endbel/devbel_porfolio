@@ -27,6 +27,7 @@ function App() {
   const { lines: heroLines, activeLine, isDone } = useHeroTerminalTyping();
   const terminalBodyRef = useRef(null);
   const [photoUnlocked, setPhotoUnlocked] = useState(false);
+  const [scrollHintOpacity, setScrollHintOpacity] = useState(1);
 
   useEffect(() => {
     const links = document.querySelectorAll("a, button");
@@ -47,6 +48,34 @@ function App() {
       terminalBodyRef.current.scrollTop = terminalBodyRef.current.scrollHeight;
     }
   }, [history]);
+
+  useEffect(() => {
+    const updateScrollHintOpacity = () => {
+      if (!contactRef.current) return;
+
+      const rect = contactRef.current.getBoundingClientRect();
+      const viewportHeight = window.innerHeight || 1;
+
+      // Starts fading when contacto reaches the bottom edge, then fades out progressively.
+      const fadeStart = viewportHeight;
+      const fadeEnd = viewportHeight * 0.35;
+      const progress = (fadeStart - rect.top) / (fadeStart - fadeEnd);
+      const clamped = Math.min(Math.max(progress, 0), 1);
+
+      setScrollHintOpacity(1 - clamped);
+    };
+
+    updateScrollHintOpacity();
+    window.addEventListener("scroll", updateScrollHintOpacity, {
+      passive: true,
+    });
+    window.addEventListener("resize", updateScrollHintOpacity);
+
+    return () => {
+      window.removeEventListener("scroll", updateScrollHintOpacity);
+      window.removeEventListener("resize", updateScrollHintOpacity);
+    };
+  }, [contactRef]);
 
   return (
     <>
@@ -230,7 +259,9 @@ function App() {
             </div>
           </div>
         </div>
-        <div className="scroll-hint">scroll</div>
+        <div className="scroll-hint" style={{ opacity: scrollHintOpacity }}>
+          scroll
+        </div>
       </section>
 
       {/* ABOUT */}
@@ -851,37 +882,46 @@ function App() {
             <span className="accent">juntos?</span>
           </h2>
           <div className="availability-box" aria-label="Disponibilidad laboral">
-            <p className="availability-title">disponibilidad</p>
-            <ul className="availability-list">
-              <li>Inicio: inmediata</li>
-              <li>Modalidad: remoto o híbrido</li>
-              <li>Franja horaria: UTC-3 con superposición LATAM y Europa</li>
-              <li>Rol objetivo: frontend trainee/junior o full stack junior</li>
-            </ul>
-          </div>
-          <div className="contact-links">
-            <a
-              href="mailto:devbel_@outlook.com"
-              className="btn-primary contact-email-btn"
-            >
-              ✉ enviar email
-            </a>
-            <a
-              href="https://github.com/endbel"
-              target="_blank"
-              rel="noreferrer"
-              className="btn-outline"
-            >
-              ⌥ GitHub
-            </a>
-            <a
-              href="https://www.linkedin.com/in/miperfilbelenrodriguez/"
-              target="_blank"
-              rel="noreferrer"
-              className="btn-outline"
-            >
-              in LinkedIn
-            </a>
+            <div className="availability-layout">
+              <div className="availability-main">
+                <p className="availability-title">disponibilidad</p>
+                <ul className="availability-list">
+                  <li>Inicio: inmediato</li>
+                  <li>Modalidad: remoto o híbrido</li>
+                  <li>
+                    Franja horaria: UTC-3 con superposición en cualquier horario
+                    del mundo
+                  </li>
+                  <li>Rol objetivo: full stack junior</li>
+                </ul>
+              </div>
+              <div className="availability-actions">
+                <div className="contact-links">
+                  <a
+                    href="mailto:devbel_@outlook.com"
+                    className="btn-primary contact-email-btn"
+                  >
+                    ✉ enviar email
+                  </a>
+                  <a
+                    href="https://github.com/endbel"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn-outline"
+                  >
+                    ⌥ GitHub
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/miperfilbelenrodriguez/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn-outline"
+                  >
+                    in LinkedIn
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

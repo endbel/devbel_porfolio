@@ -240,7 +240,7 @@ function App() {
               </div>
             </div>
             <div className="hero-cta">
-              <a href="#contact" className="btn-outline">
+              <a href="mailto:devbel_@outlook.com" className="btn-outline">
                 Contactar
               </a>
               <div className="hero-social">

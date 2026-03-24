@@ -1643,10 +1643,11 @@ footer .accent {
     margin-bottom: 1rem;
   }
   h1.hero-name .line2 {
-    color: rgba(218,225,235,0.56);
+    color: rgba(208, 220, 234, 1);
+    -webkit-text-fill-color: rgba(208, 220, 234, 1);
     -webkit-text-stroke: 0;
     letter-spacing: 0.03em;
-    text-shadow: 0 0 6px rgba(200,210,224,0.16);
+    text-shadow: none;
   }
   .hero-desc { font-size: 0.95rem; }
   .hero-actions { grid-template-columns: 1fr; gap: 1rem; }
@@ -1730,11 +1731,26 @@ footer .accent {
     gap: 1rem;
   }
   .availability-actions {
-    justify-content: stretch;
-    align-items: stretch;
+    justify-content: center;
+    align-items: center;
   }
-  .contact-links { flex-direction: column; align-items: stretch; }
-  .contact-links a { width: 100%; text-align: center; }
+  .availability-actions .contact-links {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.72rem;
+  }
+  .availability-actions .contact-links a {
+    width: min(100%, 270px);
+    min-width: 0;
+    text-align: center;
+    margin-inline: auto;
+  }
+  .availability-actions .contact-email-btn {
+    width: min(100%, 270px);
+    min-width: 0;
+  }
   footer { padding: 1.2rem; flex-direction: column; gap: 0.5rem; text-align: left; }
   .scroll-hint { display: none; }
 

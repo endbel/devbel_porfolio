@@ -15,9 +15,22 @@
   --font-mono: 'Fira Code', monospace;
 
   /* Spacing */
-  --section-padding-lg: 8rem 4rem;
-  --section-padding-md: 6rem 3rem;
-  --section-padding-sm: 4rem 2rem;
+  --vw: 1vw;
+  --vh: 1vh;
+  --app-height: 100vh;
+  --app-height: 100svh;
+  --app-height: 100dvh;
+  --safe-area-top: env(safe-area-inset-top, 0px);
+  --safe-area-right: env(safe-area-inset-right, 0px);
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-left: env(safe-area-inset-left, 0px);
+  --container-pad: clamp(1rem, 3.6vw, 4rem);
+  --section-pad-y-lg: clamp(4rem, 10vh, 8rem);
+  --section-pad-y-md: clamp(3.2rem, 8vh, 6rem);
+  --section-pad-y-sm: clamp(2.4rem, 6vh, 4rem);
+  --section-padding-lg: var(--section-pad-y-lg) var(--container-pad);
+  --section-padding-md: var(--section-pad-y-md) var(--container-pad);
+  --section-padding-sm: var(--section-pad-y-sm) var(--container-pad);
   --section-margin: 0 auto;
   --section-max-width: 1200px;
 

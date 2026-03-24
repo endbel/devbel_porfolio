@@ -1,24 +1,30 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useCursor } from "./hooks/useCursor";
 import { useHeroTerminalTyping } from "./hooks/useHeroTerminalTyping";
 import { useInteractiveTerminal } from "./hooks/useInteractiveTerminal";
+import { useResponsiveViewport } from "./hooks/useResponsiveViewport";
 import { useRevealOnScroll } from "./hooks/useRevealOnScroll";
 import { useSidebar } from "./hooks/useSidebar";
 
 function App() {
+  useResponsiveViewport();
+
   const { cursorRef, ringRef, handleHoverEnter, handleHoverLeave } =
     useCursor();
   const { isOpen: sidebarOpen, openSidebar, closeSidebar } = useSidebar();
-  const { ref: aboutRef, isVisible: aboutVisible } = useRevealOnScroll(0.15);
+  const {
+    ref: aboutRef,
+    isVisible: aboutVisible,
+    hasBeenVisible: aboutSeen,
+  } = useRevealOnScroll(0.15, { once: false });
   const { ref: projectsRef, isVisible: projectsVisible } =
     useRevealOnScroll(0.15);
   const { ref: skillsRef, isVisible: skillsVisible } = useRevealOnScroll(0.15);
   const { ref: contactRef, isVisible: contactVisible } =
     useRevealOnScroll(0.15);
-  const { prompt, history, runCommand } = useInteractiveTerminal();
+  const { history } = useInteractiveTerminal();
   const { lines: heroLines, activeLine, isDone } = useHeroTerminalTyping();
   const terminalBodyRef = useRef(null);
-  const [terminalInput, setTerminalInput] = useState("");
 
   useEffect(() => {
     const links = document.querySelectorAll("a, button");
@@ -39,12 +45,6 @@ function App() {
       terminalBodyRef.current.scrollTop = terminalBodyRef.current.scrollHeight;
     }
   }, [history]);
-
-  const handleTerminalSubmit = (e) => {
-    e.preventDefault();
-    runCommand(terminalInput);
-    setTerminalInput("");
-  };
 
   return (
     <>
@@ -171,18 +171,46 @@ function App() {
               )}
             </span>
           </h1>
-          <p className="hero-desc">
-            Construyo experiencias web funcionales y elegantes. Apasionada por
-            el código limpio, los proyectos de impacto y el aprendizaje
-            continuo.
-          </p>
-          <div className="hero-cta">
-            <a href="#projects" className="btn-primary">
-              Ver proyectos
-            </a>
-            <a href="#contact" className="btn-outline">
-              Contactar
-            </a>
+          <div className="hero-actions">
+            <div
+              className="recruiter-scan"
+              aria-label="Resumen para reclutadores"
+            >
+              <ul className="scan-list">
+                <li className="scan-stack">
+                  react · javascript · typescript · node.js · sql
+                </li>
+                <li>especialista frontend · visión product · ux-driven</li>
+                <li>remoto/híbrido · utc-3 · disponibilidad inmediata</li>
+              </ul>
+            </div>
+            <div className="hero-cta">
+              <a href="#projects" className="btn-primary">
+                Proyectos
+              </a>
+              <a href="#contact" className="btn-outline">
+                Contactar
+              </a>
+              <div className="hero-social">
+                <a
+                  href="https://github.com/endbel"
+                  target="_blank"
+                  rel="noreferrer"
+                  title="GitHub"
+                >
+                  GitHub
+                </a>
+                <span className="social-separator">·</span>
+                <a
+                  href="https://www.linkedin.com/in/miperfilbelenrodriguez/"
+                  target="_blank"
+                  rel="noreferrer"
+                  title="LinkedIn"
+                >
+                  LinkedIn
+                </a>
+              </div>
+            </div>
           </div>
         </div>
         <div className="scroll-hint">scroll</div>
@@ -190,40 +218,32 @@ function App() {
 
       {/* ABOUT */}
       <section id="about" ref={aboutRef}>
-        <div className={`reveal ${aboutVisible ? "visible" : ""}`}>
+        <div
+          className={`reveal ${aboutVisible ? "visible" : ""} ${aboutSeen ? "seen" : ""}`}
+        >
           <p className="section-label">01 — sobre mí</p>
-          <h2 className="section-title">
-            Código con
-            <br />
-            propósito.
-          </h2>
-          <div className="about-text">
-            <p>
-              Hola, soy <strong>Belén</strong>, desarrolladora junior con base
-              en{" "}
-              <strong>
-                HTML, CSS, JavaScript, Node.js, React, Python, PHP, TypeScript,
-                MySQL y Java
-              </strong>
-              . Me enfoco en construir proyectos reales que resuelvan problemas
-              reales.
-            </p>
-            <p>
-              Me interesa especialmente el desarrollo{" "}
-              <strong>full-stack</strong> y los proyectos de alto impacto. Tengo
-              habilidades de <strong>resolución de problemas</strong>, trabajo
-              en equipo y familiaridad con{" "}
-              <strong>metodologías ágiles (Scrum)</strong>. Actualmente
-              construyendo mi portfolio y sumando proyectos que demuestren mis
-              capacidades.
-            </p>
-            <p>
-              Manejo <strong>inglés intermedio</strong> con capacidad de leer
-              documentación técnica y comunicarme en entornos de trabajo.
-            </p>
+          <div className="about-snapshot">
+            <p className="about-snapshot-title">perfil y habilidades clave</p>
+            <div
+              className="about-pills"
+              aria-label="Resumen de stack y habilidades"
+            >
+              <span>Frontend: HTML, CSS, JavaScript, React, TypeScript</span>
+              <span>
+                Backend y datos: Node.js, PHP, Python, Java, MySQL, MongoDB,
+                Prisma
+              </span>
+              <span>
+                Tooling y calidad: Vite, Git/GitHub, GitHub Actions, ESLint,
+                npm, Docker
+              </span>
+              <span>
+                Fortalezas: resolución de problemas y trabajo en equipo
+              </span>
+            </div>
           </div>
           <div className="about-visual">
-            <div className="terminal interactive-terminal">
+            <div className="terminal">
               <div className="terminal-bar">
                 <span
                   className="t-dot"
@@ -237,10 +257,10 @@ function App() {
                   className="t-dot"
                   style={{ background: "#28c840" }}
                 ></span>
-                <span className="t-title">terminal interactiva</span>
+                <span className="t-title">Codigo con proposito.</span>
               </div>
               <div
-                className="terminal-body terminal-body-interactive"
+                className="terminal-body terminal-body-static"
                 ref={terminalBodyRef}
               >
                 {history.map((line, idx) => (
@@ -256,27 +276,11 @@ function App() {
                     >
                       {line.text}
                     </span>
+                    {idx === history.length - 1 && (
+                      <span className="t-cursor"></span>
+                    )}
                   </span>
                 ))}
-                <form
-                  className="terminal-input-row"
-                  onSubmit={handleTerminalSubmit}
-                >
-                  <label className="sr-only" htmlFor="interactiveTerminalInput">
-                    Comando terminal
-                  </label>
-                  <span className="t-prompt">{prompt}</span>
-                  <input
-                    id="interactiveTerminalInput"
-                    className="terminal-input"
-                    type="text"
-                    value={terminalInput}
-                    onChange={(e) => setTerminalInput(e.target.value)}
-                    autoComplete="off"
-                    spellCheck="false"
-                    placeholder='Escribe "help" y presiona Enter'
-                  />
-                </form>
               </div>
             </div>
             <div className="accent-corner"></div>
@@ -311,6 +315,10 @@ function App() {
               actual según la ciudad ingresada. Trabajé con fetch, manejo de
               JSON y diseño responsive.
             </p>
+            <p className="project-impact">
+              Impacto: reduje el tiempo de consulta percibido con feedback
+              visual de carga y validaciones en tiempo real.
+            </p>
             <div className="project-tags">
               <span className="tag">HTML</span>
               <span className="tag">CSS</span>
@@ -335,6 +343,10 @@ function App() {
               Aplicación de consola en Java que convierte entre distintas
               monedas. Consolidé el uso de programación orientada a objetos,
               estructuras de control y manejo de entrada/salida.
+            </p>
+            <p className="project-impact">
+              Impacto: mejoré la mantenibilidad separando lógica de conversión y
+              validación de entrada en componentes reutilizables.
             </p>
             <div className="project-tags">
               <span className="tag">Java</span>
@@ -362,6 +374,11 @@ function App() {
               frontend y backend con React, TypeScript y Node.js bajo
               metodología ágil.
             </p>
+            <p className="project-impact">
+              Impacto: entregas iterativas en sprint con mejoras funcionales
+              semanales y reducción de issues de integración entre frontend y
+              backend.
+            </p>
             <div className="project-tags">
               <span className="tag">React</span>
               <span className="tag">TypeScript</span>
@@ -387,6 +404,10 @@ function App() {
               App de gestión de tareas desarrollada en equipo para la UTN.
               Incluye registro de usuarios, prioridades, categorías, filtros y
               diseño mobile-first. Participé en frontend y backend.
+            </p>
+            <p className="project-impact">
+              Impacto: organicé el flujo de tareas por prioridades y categorías,
+              mejorando la velocidad de uso en pruebas funcionales.
             </p>
             <div className="project-tags">
               <span className="tag">HTML</span>
@@ -415,6 +436,10 @@ function App() {
               autenticación, dashboard, gestión de pacientes y turnos. Participé
               en el frontend y base de datos con Next.js, Prisma y TypeScript.
             </p>
+            <p className="project-impact">
+              Impacto: optimicé flujos administrativos clave y colaboré en un
+              esquema de datos más claro para turnos y pacientes.
+            </p>
             <div className="project-tags">
               <span className="tag">Next.js</span>
               <span className="tag">React</span>
@@ -441,6 +466,10 @@ function App() {
               Plataforma de gestión para academia de inglés desarrollada en
               equipo. Administra alumnos, clases y profesores. Participé en
               frontend y backend con contenedorización mediante Docker.
+            </p>
+            <p className="project-impact">
+              Impacto: estandaricé el entorno de desarrollo con contenedores
+              para acelerar onboarding técnico del equipo.
             </p>
             <div className="project-tags">
               <span className="tag">JavaScript</span>
@@ -469,6 +498,10 @@ function App() {
           <div className={`reveal ${skillsVisible ? "visible" : ""}`}>
             <p className="section-label">03 — habilidades</p>
             <h2 className="section-title">Mi stack.</h2>
+            <p className="skills-context">
+              Tooling del proyecto: Vite + React + ESLint, con flujo de
+              integración/despliegue usando GitHub Actions.
+            </p>
           </div>
 
           <div
@@ -646,6 +679,71 @@ function App() {
             <div className="skill-bar-item">
               <div className="skill-bar-header">
                 <span className="skill-bar-name">
+                  <i className="devicon-vitejs-plain"></i>
+                  Vite
+                </span>
+                <span className="skill-bar-level">intermedio</span>
+              </div>
+              <div className="skill-bar-track">
+                <div className="skill-bar-fill" data-width="65"></div>
+              </div>
+            </div>
+
+            <div className="skill-bar-item">
+              <div className="skill-bar-header">
+                <span className="skill-bar-name">
+                  <i className="devicon-githubactions-plain"></i>
+                  GitHub Actions
+                </span>
+                <span className="skill-bar-level">básico</span>
+              </div>
+              <div className="skill-bar-track">
+                <div className="skill-bar-fill" data-width="40"></div>
+              </div>
+            </div>
+
+            <div className="skill-bar-item">
+              <div className="skill-bar-header">
+                <span className="skill-bar-name">
+                  <i className="devicon-prisma-original"></i>
+                  Prisma
+                </span>
+                <span className="skill-bar-level">básico</span>
+              </div>
+              <div className="skill-bar-track">
+                <div className="skill-bar-fill" data-width="40"></div>
+              </div>
+            </div>
+
+            <div className="skill-bar-item">
+              <div className="skill-bar-header">
+                <span className="skill-bar-name">
+                  <i className="devicon-mongodb-plain"></i>
+                  MongoDB
+                </span>
+                <span className="skill-bar-level">básico</span>
+              </div>
+              <div className="skill-bar-track">
+                <div className="skill-bar-fill" data-width="35"></div>
+              </div>
+            </div>
+
+            <div className="skill-bar-item">
+              <div className="skill-bar-header">
+                <span className="skill-bar-name">
+                  <i className="devicon-eslint-original"></i>
+                  ESLint
+                </span>
+                <span className="skill-bar-level">intermedio</span>
+              </div>
+              <div className="skill-bar-track">
+                <div className="skill-bar-fill" data-width="60"></div>
+              </div>
+            </div>
+
+            <div className="skill-bar-item">
+              <div className="skill-bar-header">
+                <span className="skill-bar-name">
                   <i
                     className="fa-solid fa-plug"
                     style={{ color: "var(--accent)" }}
@@ -716,8 +814,20 @@ function App() {
           <p className="contact-sub">
             Abierta a oportunidades, proyectos freelance y colaboraciones.
           </p>
+          <div className="availability-box" aria-label="Disponibilidad laboral">
+            <p className="availability-title">disponibilidad</p>
+            <ul className="availability-list">
+              <li>Inicio: inmediata</li>
+              <li>Modalidad: remoto o híbrido</li>
+              <li>Franja horaria: UTC-3 con superposición LATAM y Europa</li>
+              <li>Rol objetivo: frontend trainee/junior o full stack junior</li>
+            </ul>
+          </div>
           <div className="contact-links">
-            <a href="mailto:tu@email.com" className="btn-primary">
+            <a
+              href="mailto:devbel_@outlook.com"
+              className="btn-primary contact-email-btn"
+            >
               ✉ enviar email
             </a>
             <a

@@ -2,57 +2,57 @@ import { useEffect, useState } from "react";
 
 const TERMINAL_SEQUENCES = {
   es: [
-    { type: "val", text: "Hola, soy Belen, Junior Developer." },
+    { type: "val", text: "Hola, soy Belen, Full Stack Junior." },
     {
       type: "val",
-      text: "Construyo experiencias web funcionales y elegantes, con foco en codigo limpio y proyectos de impacto.",
+      text: "Construyo productos web con foco en impacto real, claridad para usuarios y objetivos de negocio.",
     },
     {
       type: "val",
-      text: "Stack principal: HTML, CSS, JavaScript, React, TypeScript, Node.js, MySQL y Java.",
+      text: "Stack principal: React, Next.js, TypeScript, Node.js, Prisma y SQL.",
     },
     {
       type: "val",
-      text: "Tambien trabajo con MongoDB y Prisma para construir soluciones full stack mantenibles.",
+      text: "Tambien trabajo con REST API, Tailwind, Docker y MongoDB para soluciones full stack mantenibles.",
     },
     {
       type: "val",
-      text: "En el flujo diario aplico Vite, ESLint y GitHub Actions para mejorar velocidad, calidad y despliegue continuo.",
+      text: "Diferencial: combino experiencia en soporte tecnico + desarrollo para resolver incidentes y entregar soluciones estables.",
     },
     {
       type: "val",
-      text: "Fortalezas: resolucion de problemas, trabajo en equipo y metodologia agil (Scrum).",
+      text: "Trabajo remoto (UTC-3), disponibilidad inmediata y comunicacion clara con equipos tecnicos y de negocio.",
     },
     {
       type: "val",
-      text: "Ingles intermedio para leer documentacion tecnica y comunicarme en entornos de trabajo.",
+      text: "Ingles B2 para documentacion tecnica, colaboracion internacional y reuniones de proyecto.",
     },
   ],
   en: [
-    { type: "val", text: "Hi, I'm Belen, Junior Developer." },
+    { type: "val", text: "Hi, I'm Belen, a Junior Full Stack Developer." },
     {
       type: "val",
-      text: "I build functional and elegant web experiences, focused on clean code and high-impact projects.",
+      text: "I build web products focused on real impact, user clarity, and business goals.",
     },
     {
       type: "val",
-      text: "Main stack: HTML, CSS, JavaScript, React, TypeScript, Node.js, MySQL, and Java.",
+      text: "Core stack: React, Next.js, TypeScript, Node.js, Prisma, and SQL.",
     },
     {
       type: "val",
-      text: "I also work with MongoDB and Prisma to build maintainable full-stack solutions.",
+      text: "I also work with REST API, Tailwind, Docker, and MongoDB to build maintainable full stack solutions.",
     },
     {
       type: "val",
-      text: "In daily workflows I apply Vite, ESLint, and GitHub Actions to improve speed, quality, and continuous delivery.",
+      text: "Differential: I combine technical support + development to solve incidents and deliver stable solutions.",
     },
     {
       type: "val",
-      text: "Strengths: problem-solving, teamwork, and agile methodology (Scrum).",
+      text: "I work remotely (UTC-3), with immediate availability and clear communication across technical and business teams.",
     },
     {
       type: "val",
-      text: "Intermediate English for reading technical docs and communicating in work environments.",
+      text: "English B2 for technical documentation, international collaboration, and project meetings.",
     },
   ],
 };

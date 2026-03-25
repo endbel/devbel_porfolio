@@ -45,15 +45,15 @@ function App() {
       hero: {
         recruiterSummary: "Resumen para reclutadores",
         stackLine: "react · next.js · typescript · node.js · prisma · sql",
-        line2: "full stack · api rest · clean code · foco en negocio",
-        line3: "freelance-ready · comunicación clara · remoto · utc-3",
+        line2: "full stack junior · foco en negocio · API REST",
+        line3: "remoto inmediato · UTC-3 · soporte + desarrollo",
         projectsCta: "PROYECTOS",
         contactCta: "Contactar",
         scroll: "scroll",
       },
       about: {
         sectionLabel: "01 sobre mí",
-        snapshotTitle: "perfil y habilidades clave",
+        snapshotTitle: "perfil full stack con enfoque en impacto",
         pillsAria: "Resumen de stack y habilidades",
         terminalTitle: "Codigo con proposito.",
         hidePhoto: "Ocultar foto de perfil",
@@ -74,7 +74,7 @@ function App() {
       },
       skills: {
         sectionLabel: "03 habilidades",
-        title: "Mi stack.",
+        title: "Stack principal y capacidades.",
         intermediate: "intermedio alto",
         basic: "intermedio",
         english: "Inglés (B2)",
@@ -85,11 +85,10 @@ function App() {
         heading2: "juntos?",
         availabilityAria: "Disponibilidad laboral",
         availabilityTitle: "disponibilidad",
-        item1: "Inicio: inmediato",
-        item2: "Modalidad: remoto",
-        item3:
-          "Franja horaria: UTC-3 con superposición en cualquier horario del mundo",
-        item4: "Rol objetivo: full stack",
+        item1: "Inicio inmediato",
+        item2: "Modalidad remota",
+        item3: "UTC-3 con superposición global",
+        item4: "Rol objetivo: full stack junior",
         sendEmail: "✉ enviar email",
       },
       footer: {
@@ -111,15 +110,15 @@ function App() {
       hero: {
         recruiterSummary: "Recruiter summary",
         stackLine: "react · next.js · typescript · node.js · prisma · sql",
-        line2: "full stack · rest api · clean code · business focused",
-        line3: "freelance-ready · clear communication · remote · utc-3",
+        line2: "junior full stack · business focus · REST API",
+        line3: "remote now · UTC-3 · support + development",
         projectsCta: "PROJECTS",
         contactCta: "Contact",
         scroll: "scroll",
       },
       about: {
         sectionLabel: "01 about me",
-        snapshotTitle: "profile and key skills",
+        snapshotTitle: "full stack profile focused on impact",
         pillsAria: "Stack and skills summary",
         terminalTitle: "Code with purpose.",
         hidePhoto: "Hide profile photo",
@@ -140,7 +139,7 @@ function App() {
       },
       skills: {
         sectionLabel: "03 skills",
-        title: "My stack.",
+        title: "Core stack and capabilities.",
         intermediate: "upper intermediate",
         basic: "intermediate",
         english: "English (B2)",
@@ -151,10 +150,10 @@ function App() {
         heading2: "work together?",
         availabilityAria: "Work availability",
         availabilityTitle: "availability",
-        item1: "Start date: immediate",
-        item2: "Mode: remote",
-        item3: "Time zone: UTC-3 with overlap for any global schedule",
-        item4: "Target role: full stack",
+        item1: "Immediate start",
+        item2: "Remote mode",
+        item3: "UTC-3 with global overlap",
+        item4: "Target role: junior full stack",
         sendEmail: "✉ send email",
       },
       footer: {
@@ -506,6 +505,11 @@ function App() {
               </span>
               <span>
                 {language === "es"
+                  ? "Stack principal: React, Next.js, TypeScript, Node.js, Prisma y SQL"
+                  : "Core stack: React, Next.js, TypeScript, Node.js, Prisma, and SQL"}
+              </span>
+              <span>
+                {language === "es"
                   ? "Organización, priorización y gestión del tiempo"
                   : "Organization, prioritization, and time management"}
               </span>
@@ -604,8 +608,8 @@ function App() {
             </div>
             <p className="project-pitch">
               {language === "es"
-                ? "Aplicación web que consulta una API pública y devuelve el clima actual por ciudad con foco en claridad de uso."
-                : "Web app that queries a public API and returns current city weather with a focus on clarity of use."}
+                ? "Aplicación web que consulta una API pública y devuelve el clima por ciudad con UX clara y feedback inmediato."
+                : "Web app that queries a public API and returns city weather with clear UX and immediate feedback."}
             </p>
             <div className="project-breakdown">
               <article className="breakdown-item">
@@ -620,23 +624,23 @@ function App() {
                 <p className="breakdown-label">{t.projects.role}</p>
                 <p className="breakdown-text">
                   {language === "es"
-                    ? "Implementé fetch, manejo de JSON, validaciones y estructura responsive completa de interfaz."
-                    : "I implemented fetch, JSON handling, validations, and a fully responsive interface structure."}
+                    ? "Implementé integración con API REST, validaciones y una interfaz responsive para agilizar consultas climáticas."
+                    : "I implemented REST API integration, validations, and a responsive interface to streamline weather lookups."}
                 </p>
               </article>
               <article className="breakdown-item">
                 <p className="breakdown-label">{t.projects.impact}</p>
                 <p className="breakdown-text">
                   {language === "es"
-                    ? "Reduje el tiempo de consulta percibido con estados de carga visibles y respuestas más predecibles."
-                    : "I reduced perceived lookup time with visible loading states and more predictable responses."}
+                    ? "Aumenté la confianza de uso al hacer más predecible cada consulta y reducir la fricción en la interacción."
+                    : "I increased user confidence by making each lookup more predictable and reducing interaction friction."}
                 </p>
               </article>
             </div>
             <div className="project-tags">
+              <span className="tag">API REST</span>
               <span className="tag">HTML</span>
               <span className="tag">CSS</span>
-              <span className="tag">API REST</span>
             </div>
             <div className="project-links">
               <a
@@ -658,8 +662,8 @@ function App() {
             </div>
             <p className="project-pitch">
               {language === "es"
-                ? "Aplicación de consola en Java para convertir monedas con una lógica modular pensada para crecer."
-                : "Java console app for currency conversion with a modular design built to scale."}
+                ? "Aplicación de consola en Java para convertir monedas con arquitectura modular orientada a mantenibilidad."
+                : "Java console app for currency conversion with a modular architecture focused on maintainability."}
             </p>
             <div className="project-breakdown">
               <article className="breakdown-item">
@@ -674,16 +678,16 @@ function App() {
                 <p className="breakdown-label">{t.projects.role}</p>
                 <p className="breakdown-text">
                   {language === "es"
-                    ? "Apliqué POO y separé conversión, entrada/salida y validaciones en componentes reutilizables."
-                    : "I applied OOP and separated conversion, input/output, and validations into reusable components."}
+                    ? "Diseñé una arquitectura modular con POO, separando conversión, entrada/salida y validaciones para facilitar escalado."
+                    : "I designed a modular OOP architecture, separating conversion, input/output, and validations to support scaling."}
                 </p>
               </article>
               <article className="breakdown-item">
                 <p className="breakdown-label">{t.projects.impact}</p>
                 <p className="breakdown-text">
                   {language === "es"
-                    ? "Mejoré mantenibilidad y velocidad para incorporar nuevas monedas y reglas."
-                    : "I improved maintainability and speed for adding new currencies and rules."}
+                    ? "Reduje el costo de mantenimiento y aceleré nuevas incorporaciones gracias a una base modular más escalable."
+                    : "I reduced maintenance cost and sped up new additions through a more scalable modular foundation."}
                 </p>
               </article>
             </div>
@@ -712,8 +716,8 @@ function App() {
             </div>
             <p className="project-pitch">
               {language === "es"
-                ? "Plataforma full stack para reportar y visualizar problemas urbanos con entregas iterativas por sprint."
-                : "Full-stack platform to report and visualize urban issues with iterative sprint deliveries."}
+                ? "Plataforma full stack para reportar y visualizar problemas urbanos con entregas funcionales por sprint."
+                : "Full stack platform to report and visualize urban issues with functional sprint-based deliveries."}
             </p>
             <div className="project-breakdown">
               <article className="breakdown-item">
@@ -728,16 +732,16 @@ function App() {
                 <p className="breakdown-label">{t.projects.role}</p>
                 <p className="breakdown-text">
                   {language === "es"
-                    ? "Trabajé en frontend y backend con React, TypeScript y Node.js dentro de metodología ágil."
-                    : "I worked on frontend and backend with React, TypeScript, and Node.js within an agile workflow."}
+                    ? "Desarrollé funcionalidades en frontend y backend con React, TypeScript y Node.js para sostener entregas por sprint."
+                    : "I developed frontend and backend features with React, TypeScript, and Node.js to sustain sprint deliveries."}
                 </p>
               </article>
               <article className="breakdown-item">
                 <p className="breakdown-label">{t.projects.impact}</p>
                 <p className="breakdown-text">
                   {language === "es"
-                    ? "Reducimos issues de integración y sostuvimos mejoras funcionales semanales."
-                    : "We reduced integration issues and sustained weekly functional improvements."}
+                    ? "Reducimos tiempos de integración y sostuvimos releases semanales con mejoras funcionales continuas."
+                    : "We reduced integration time and sustained weekly releases with continuous functional improvements."}
                 </p>
               </article>
             </div>
@@ -767,8 +771,8 @@ function App() {
             </div>
             <p className="project-pitch">
               {language === "es"
-                ? "App de gestión de tareas para UTN con prioridades, categorías, filtros y enfoque mobile-first."
-                : "Task management app for UTN with priorities, categories, filters, and a mobile-first approach."}
+                ? "App de gestión de tareas para UTN con prioridades, categorías y filtros para mejorar ejecución diaria."
+                : "Task management app for UTN with priorities, categories, and filters to improve day-to-day execution."}
             </p>
             <div className="project-breakdown">
               <article className="breakdown-item">
@@ -783,25 +787,25 @@ function App() {
                 <p className="breakdown-label">{t.projects.role}</p>
                 <p className="breakdown-text">
                   {language === "es"
-                    ? "Participé en frontend y backend implementando filtros, categorías y estructura de prioridades."
-                    : "I contributed to frontend and backend, implementing filters, categories, and priority structure."}
+                    ? "Implementé en frontend y backend filtros, categorías y prioridades para ordenar la ejecución de tareas."
+                    : "I implemented frontend and backend filters, categories, and priorities to organize task execution."}
                 </p>
               </article>
               <article className="breakdown-item">
                 <p className="breakdown-label">{t.projects.impact}</p>
                 <p className="breakdown-text">
                   {language === "es"
-                    ? "Mejoró la velocidad de uso en pruebas funcionales y la claridad operativa diaria."
-                    : "Usage speed improved in functional tests along with day-to-day operational clarity."}
+                    ? "Mejoré la ejecución diaria de tareas al priorizar acciones y reducir pasos innecesarios en el flujo."
+                    : "I improved daily task execution by prioritizing actions and reducing unnecessary flow steps."}
                 </p>
               </article>
             </div>
             <div className="project-tags">
-              <span className="tag">HTML</span>
-              <span className="tag">CSS</span>
               <span className="tag">JavaScript</span>
               <span className="tag">PHP</span>
-              <span className="tag">MySQL</span>
+              <span className="tag">SQL (MySQL)</span>
+              <span className="tag">HTML</span>
+              <span className="tag">CSS</span>
             </div>
             <div className="project-links">
               <a
@@ -823,8 +827,8 @@ function App() {
             </div>
             <p className="project-pitch">
               {language === "es"
-                ? "Sistema de gestión clínica con autenticación, dashboard y módulo de pacientes/turnos para operaciones diarias."
-                : "Clinical management system with authentication, dashboard, and patient/appointments module for daily operations."}
+                ? "Sistema de gestión clínica con autenticación, dashboard y módulos de pacientes/turnos para operación diaria."
+                : "Clinical management system with authentication, dashboard, and patient/appointment modules for daily operations."}
             </p>
             <div className="project-breakdown">
               <article className="breakdown-item">
@@ -839,25 +843,25 @@ function App() {
                 <p className="breakdown-label">{t.projects.role}</p>
                 <p className="breakdown-text">
                   {language === "es"
-                    ? "Trabajé en frontend y base de datos con Next.js, TypeScript y Prisma."
-                    : "I worked on frontend and database with Next.js, TypeScript, and Prisma."}
+                    ? "Implementé frontend y modelo de datos con Next.js, TypeScript y Prisma para flujos clínicos más consistentes."
+                    : "I implemented frontend and data modeling with Next.js, TypeScript, and Prisma for more consistent clinical workflows."}
                 </p>
               </article>
               <article className="breakdown-item">
                 <p className="breakdown-label">{t.projects.impact}</p>
                 <p className="breakdown-text">
                   {language === "es"
-                    ? "Se optimizaron procesos clave y se ordenó la estructura de turnos/pacientes."
-                    : "Key processes were optimized and the appointments/patients structure was reorganized."}
+                    ? "Optimicé procesos administrativos críticos y mejoré la trazabilidad de turnos/pacientes para la operación diaria."
+                    : "I optimized critical administrative workflows and improved appointments/patients traceability for daily operations."}
                 </p>
               </article>
             </div>
             <div className="project-tags">
-              <span className="tag">Next.js</span>
               <span className="tag">React</span>
+              <span className="tag">Next.js</span>
               <span className="tag">TypeScript</span>
-              <span className="tag">Tailwind</span>
               <span className="tag">Prisma</span>
+              <span className="tag">Tailwind</span>
             </div>
             <div className="project-links">
               <a
@@ -879,7 +883,7 @@ function App() {
             </div>
             <p className="project-pitch">
               {language === "es"
-                ? "Plataforma de gestión para academia de inglés con administración de alumnos, clases y profesores."
+                ? "Plataforma de gestión para academia de inglés con administración de alumnos, clases y docentes."
                 : "Management platform for an English academy with students, classes, and teachers administration."}
             </p>
             <div className="project-breakdown">
@@ -895,25 +899,25 @@ function App() {
                 <p className="breakdown-label">{t.projects.role}</p>
                 <p className="breakdown-text">
                   {language === "es"
-                    ? "Participé en frontend y backend, y trabajé la contenedorización con Docker."
-                    : "I contributed to frontend and backend and worked on containerization with Docker."}
+                    ? "Desarrollé módulos en frontend y backend y apliqué Docker para un entorno reproducible entre integrantes."
+                    : "I developed frontend and backend modules and applied Docker for a reproducible environment across team members."}
                 </p>
               </article>
               <article className="breakdown-item">
                 <p className="breakdown-label">{t.projects.impact}</p>
                 <p className="breakdown-text">
                   {language === "es"
-                    ? "Se estandarizó el entorno de desarrollo y se aceleró la incorporación técnica del equipo."
-                    : "The development environment was standardized and team technical onboarding sped up."}
+                    ? "Estandaricé el entorno técnico, reduje bloqueos de setup y aceleré la productividad inicial del equipo."
+                    : "I standardized the technical environment, reduced setup blockers, and accelerated initial team productivity."}
                 </p>
               </article>
             </div>
             <div className="project-tags">
               <span className="tag">JavaScript</span>
-              <span className="tag">HTML/CSS</span>
-              <span className="tag">Tailwind</span>
               <span className="tag">Prisma</span>
+              <span className="tag">Tailwind</span>
               <span className="tag">Docker</span>
+              <span className="tag">HTML/CSS</span>
             </div>
             <div className="project-links">
               <a
@@ -942,33 +946,39 @@ function App() {
           >
             <article className="skills-category-card">
               <p className="skills-category-title">
-                {language === "es" ? "Lenguajes" : "Languages"}
+                {language === "es" ? "Stack principal" : "Core stack"}
               </p>
               <p className="skills-category-items">
-                JavaScript, TypeScript, Python, Java, PHP, SQL, HTML5/CSS3
+                React, Next.js, TypeScript, Node.js, Prisma, SQL
               </p>
             </article>
             <article className="skills-category-card">
               <p className="skills-category-title">
-                {language === "es" ? "Frameworks y UI" : "Frameworks and UI"}
+                {language === "es" ? "Frontend y APIs" : "Frontend and APIs"}
               </p>
               <p className="skills-category-items">
-                React, Next.js, Tailwind CSS
+                JavaScript, HTML5/CSS3, Tailwind CSS, REST API
               </p>
-            </article>
-            <article className="skills-category-card">
-              <p className="skills-category-title">
-                {language === "es" ? "Bases de Datos" : "Databases"}
-              </p>
-              <p className="skills-category-items">MySQL, MongoDB, Prisma</p>
             </article>
             <article className="skills-category-card">
               <p className="skills-category-title">
                 {language === "es"
-                  ? "Herramientas Empresariales"
-                  : "Enterprise Tools"}
+                  ? "Lenguajes y Backend"
+                  : "Languages and Backend"}
               </p>
-              <p className="skills-category-items">CRM, Avaya, Slack</p>
+              <p className="skills-category-items">
+                Java, Python, PHP, MongoDB
+              </p>
+            </article>
+            <article className="skills-category-card">
+              <p className="skills-category-title">
+                {language === "es"
+                  ? "Toolchain de entrega"
+                  : "Delivery toolchain"}
+              </p>
+              <p className="skills-category-items">
+                Git, GitHub, Vite, npm, ESLint, GitHub Actions, Docker
+              </p>
             </article>
             <article className="skills-category-card">
               <p className="skills-category-title">
@@ -978,8 +988,8 @@ function App() {
               </p>
               <p className="skills-category-items">
                 {language === "es"
-                  ? "Comunicación, gestión de tickets, trabajo en equipo, empatía, resolución de incidentes"
-                  : "Communication, ticket management, teamwork, empathy, incident resolution"}
+                  ? "Inglés B2, comunicación, gestión de tickets, trabajo en equipo, empatía, resolución de incidentes"
+                  : "English B2, communication, ticket management, teamwork, empathy, incident resolution"}
               </p>
             </article>
           </div>
@@ -1032,10 +1042,10 @@ function App() {
                   <i className="devicon-typescript-plain"></i>
                   TypeScript
                 </span>
-                <span className="skill-bar-level">{t.skills.basic}</span>
+                <span className="skill-bar-level">{t.skills.intermediate}</span>
               </div>
               <div className="skill-bar-track">
-                <div className="skill-bar-fill" data-width="55"></div>
+                <div className="skill-bar-fill" data-width="62"></div>
               </div>
             </div>
 
@@ -1045,10 +1055,10 @@ function App() {
                   <i className="devicon-react-original"></i>
                   React
                 </span>
-                <span className="skill-bar-level">{t.skills.basic}</span>
+                <span className="skill-bar-level">{t.skills.intermediate}</span>
               </div>
               <div className="skill-bar-track">
-                <div className="skill-bar-fill" data-width="58"></div>
+                <div className="skill-bar-fill" data-width="66"></div>
               </div>
             </div>
 
@@ -1058,10 +1068,10 @@ function App() {
                   <i className="devicon-nextjs-plain devicon-nextjs-original"></i>
                   Next.js
                 </span>
-                <span className="skill-bar-level">{t.skills.basic}</span>
+                <span className="skill-bar-level">{t.skills.intermediate}</span>
               </div>
               <div className="skill-bar-track">
-                <div className="skill-bar-fill" data-width="56"></div>
+                <div className="skill-bar-fill" data-width="61"></div>
               </div>
             </div>
 
@@ -1084,10 +1094,10 @@ function App() {
                   <i className="devicon-nodejs-plain"></i>
                   Node.js
                 </span>
-                <span className="skill-bar-level">{t.skills.basic}</span>
+                <span className="skill-bar-level">{t.skills.intermediate}</span>
               </div>
               <div className="skill-bar-track">
-                <div className="skill-bar-fill" data-width="58"></div>
+                <div className="skill-bar-fill" data-width="61"></div>
               </div>
             </div>
 
@@ -1134,12 +1144,12 @@ function App() {
               <div className="skill-bar-header">
                 <span className="skill-bar-name">
                   <i className="devicon-mysql-plain"></i>
-                  MySQL
+                  SQL (MySQL)
                 </span>
-                <span className="skill-bar-level">{t.skills.basic}</span>
+                <span className="skill-bar-level">{t.skills.intermediate}</span>
               </div>
               <div className="skill-bar-track">
-                <div className="skill-bar-fill" data-width="56"></div>
+                <div className="skill-bar-fill" data-width="62"></div>
               </div>
             </div>
 
@@ -1214,10 +1224,10 @@ function App() {
                   <i className="devicon-prisma-original"></i>
                   Prisma
                 </span>
-                <span className="skill-bar-level">{t.skills.basic}</span>
+                <span className="skill-bar-level">{t.skills.intermediate}</span>
               </div>
               <div className="skill-bar-track">
-                <div className="skill-bar-fill" data-width="54"></div>
+                <div className="skill-bar-fill" data-width="60"></div>
               </div>
             </div>
 
@@ -1331,6 +1341,11 @@ function App() {
                   <li>{t.contact.item2}</li>
                   <li>{t.contact.item3}</li>
                   <li>{t.contact.item4}</li>
+                  <li>
+                    {language === "es"
+                      ? "Diferencial: soporte técnico + desarrollo"
+                      : "Differential: technical support + development"}
+                  </li>
                 </ul>
               </div>
               <div className="availability-actions">

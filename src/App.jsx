@@ -74,8 +74,8 @@ function App() {
       skills: {
         sectionLabel: "03 habilidades",
         title: "Mi stack.",
-        intermediate: "intermedio",
-        basic: "básico",
+        intermediate: "intermedio alto",
+        basic: "intermedio",
         english: "Inglés",
       },
       contact: {
@@ -139,8 +139,8 @@ function App() {
       skills: {
         sectionLabel: "03 skills",
         title: "My stack.",
-        intermediate: "intermediate",
-        basic: "basic",
+        intermediate: "upper intermediate",
+        basic: "intermediate",
         english: "English",
       },
       contact: {
@@ -988,7 +988,7 @@ function App() {
                 <span className="skill-bar-level">{t.skills.basic}</span>
               </div>
               <div className="skill-bar-track">
-                <div className="skill-bar-fill" data-width="35"></div>
+                <div className="skill-bar-fill" data-width="55"></div>
               </div>
             </div>
 
@@ -1001,7 +1001,7 @@ function App() {
                 <span className="skill-bar-level">{t.skills.basic}</span>
               </div>
               <div className="skill-bar-track">
-                <div className="skill-bar-fill" data-width="45"></div>
+                <div className="skill-bar-fill" data-width="58"></div>
               </div>
             </div>
 
@@ -1014,7 +1014,7 @@ function App() {
                 <span className="skill-bar-level">{t.skills.basic}</span>
               </div>
               <div className="skill-bar-track">
-                <div className="skill-bar-fill" data-width="45"></div>
+                <div className="skill-bar-fill" data-width="58"></div>
               </div>
             </div>
 
@@ -1027,7 +1027,7 @@ function App() {
                 <span className="skill-bar-level">{t.skills.basic}</span>
               </div>
               <div className="skill-bar-track">
-                <div className="skill-bar-fill" data-width="35"></div>
+                <div className="skill-bar-fill" data-width="52"></div>
               </div>
             </div>
 
@@ -1040,7 +1040,7 @@ function App() {
                 <span className="skill-bar-level">{t.skills.basic}</span>
               </div>
               <div className="skill-bar-track">
-                <div className="skill-bar-fill" data-width="40"></div>
+                <div className="skill-bar-fill" data-width="56"></div>
               </div>
             </div>
 
@@ -1053,7 +1053,7 @@ function App() {
                 <span className="skill-bar-level">{t.skills.basic}</span>
               </div>
               <div className="skill-bar-track">
-                <div className="skill-bar-fill" data-width="35"></div>
+                <div className="skill-bar-fill" data-width="52"></div>
               </div>
             </div>
 
@@ -1066,7 +1066,7 @@ function App() {
                 <span className="skill-bar-level">{t.skills.basic}</span>
               </div>
               <div className="skill-bar-track">
-                <div className="skill-bar-fill" data-width="40"></div>
+                <div className="skill-bar-fill" data-width="56"></div>
               </div>
             </div>
 
@@ -1105,7 +1105,7 @@ function App() {
                 <span className="skill-bar-level">{t.skills.basic}</span>
               </div>
               <div className="skill-bar-track">
-                <div className="skill-bar-fill" data-width="50"></div>
+                <div className="skill-bar-fill" data-width="60"></div>
               </div>
             </div>
 
@@ -1131,7 +1131,7 @@ function App() {
                 <span className="skill-bar-level">{t.skills.basic}</span>
               </div>
               <div className="skill-bar-track">
-                <div className="skill-bar-fill" data-width="40"></div>
+                <div className="skill-bar-fill" data-width="54"></div>
               </div>
             </div>
 
@@ -1144,7 +1144,7 @@ function App() {
                 <span className="skill-bar-level">{t.skills.basic}</span>
               </div>
               <div className="skill-bar-track">
-                <div className="skill-bar-fill" data-width="40"></div>
+                <div className="skill-bar-fill" data-width="54"></div>
               </div>
             </div>
 
@@ -1157,7 +1157,7 @@ function App() {
                 <span className="skill-bar-level">{t.skills.basic}</span>
               </div>
               <div className="skill-bar-track">
-                <div className="skill-bar-fill" data-width="35"></div>
+                <div className="skill-bar-fill" data-width="52"></div>
               </div>
             </div>
 
@@ -1186,7 +1186,7 @@ function App() {
                 <span className="skill-bar-level">{t.skills.basic}</span>
               </div>
               <div className="skill-bar-track">
-                <div className="skill-bar-fill" data-width="50"></div>
+                <div className="skill-bar-fill" data-width="60"></div>
               </div>
             </div>
 
@@ -1199,7 +1199,7 @@ function App() {
                 <span className="skill-bar-level">{t.skills.basic}</span>
               </div>
               <div className="skill-bar-track">
-                <div className="skill-bar-fill" data-width="30"></div>
+                <div className="skill-bar-fill" data-width="48"></div>
               </div>
             </div>
 
@@ -1212,7 +1212,7 @@ function App() {
                 <span className="skill-bar-level">{t.skills.basic}</span>
               </div>
               <div className="skill-bar-track">
-                <div className="skill-bar-fill" data-width="30"></div>
+                <div className="skill-bar-fill" data-width="48"></div>
               </div>
             </div>
 
